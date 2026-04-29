@@ -1,12 +1,12 @@
 from marshmallow import fields, validate
 
 from app.extensions import ma
-from app.models.service import Service
+from app.models.services import Services
 
 
-class ServiceSchema(ma.SQLAlchemySchema):
+class ServicesSchema(ma.SQLAlchemySchema):
     class Meta:
-        model = Service 
+        model = Services
 
     id = ma.auto_field(dump_only=True)
     nome = ma.auto_field(required=True)

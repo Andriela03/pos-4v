@@ -1,12 +1,12 @@
-rom marshmallow import fields
+from marshmallow import fields
 
 from app.extensions import ma
-from app.models.service import ServiceOrder
+from app.models.services import Provider
 
 
-class ServiceOrderSchema(ma.SQLAlchemySchema):
+class ProviderSchema(ma.SQLAlchemySchema):
     class Meta:
-        model = ServiceOrder
+        model = Provider
 
     id = ma.auto_field(dump_only=True)
     descricao = ma.auto_field(required=True)
