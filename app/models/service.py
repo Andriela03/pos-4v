@@ -13,6 +13,7 @@ class Providers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     descricao = db.Column(db.String(225))
     status = db.Column(db.String(50), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey("service.id"), nullable=False)
     services = db.relationship(
         "Service",
         secondary="providers_services",

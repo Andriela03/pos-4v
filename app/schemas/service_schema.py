@@ -11,9 +11,8 @@ class ServiceSchema(ma.SQLAlchemySchema):
     id = ma.auto_field(dump_only=True)
     nome = ma.auto_field(required=True)
     descricao = ma.auto_field(required=True, validate=validate.Length(min=1, max=256))
-    ordens = fields.Nested("ProviderSchema", only=("id", "descricao"))
-    preco_base = fields.String(
+    preco_base = fields.Integer(
         required=True,
         load_only=True,
-        validate=validate.Length(min=5, max=7),
+        validate=validate.Range(min=50),
     )
