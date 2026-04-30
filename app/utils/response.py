@@ -14,34 +14,11 @@ def error_response(message, status=400):
 def success_response_service(data, status=200):
     return {
         "success": True,
-        "data": {
-            "id": id,
-            "nome": nome,
-            "descricao": descricao,
-            "preco_base": preco_base
-        },
+        "data": data
     }, status
 
 def error_response_service(message, status=400):
     return {
         "success": False,
-        "message": message,
+        "message": message
     }, status
-
-def success_response_serviceorder(data, status=200):
-    return {
-        "success": True,
-        "data": {
-            "id": id,
-            "descricao": descricao,
-            "status": "aberta",
-            "service_id": service_id
-        },
-    }, status
-
-def error_response_serviceorder(message, status=400):
-    return {
-        "success": False,
-        "message": message,
-    }, status
-

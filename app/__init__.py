@@ -4,7 +4,7 @@ from werkzeug.exceptions import NotFound
 from .config import Config
 from .extensions import db, ma, migrate
 from .routes.service import services_bp
-from .routes.serviceorder import ordens_bp
+from .routes.providers import providers_bp
 
 
 def create_app():
@@ -18,7 +18,7 @@ def create_app():
 
     from .models import service  # noqa: F401
 
-    app.register_blueprint(orders_bp, url_prefix="/orders")
+    app.register_blueprint(providers_bp, url_prefix="/orders")
     app.register_blueprint(services_bp, url_prefix="/services")
 
     @app.errorhandler(ValidationError)

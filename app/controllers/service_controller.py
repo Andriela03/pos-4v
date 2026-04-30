@@ -1,43 +1,43 @@
 from app.extensions import db
-from app.models.services import Services
-from app.schemas.services_schema import ServicesSchema
-from app.utils.response import success_response
+from app.models.service import Service
+from app.schemas.service_schema import ServiceSchema
+from app.utils.response import success_response_service
 
-services_schema = ServicesSchema()
-services_schema = ServicesSchema(many=True)
+service_schema = ServiceSchema()
+services_schema = ServiceSchema(many=True)
 
 
 def listar_servico():
-    servicos = Services.query.all()
-    return success_response(services_schema.dump(servicos))
+    servicos = Service.query.all()
+    return success_response_service(services_schema.dump(servicos))
 
 
 def criar_servico(data):
-    dados_validados = services_schema.load(data)
+    dados_validados = service_schema.load(data)
 
-    novo_servico = Services(**dados_validados)
+    novo_servico = Service(**dados_validados)
 
     db.session.add(novo_servico)
     db.session.commit()
 
-    return success_response(services_schema.dump(novo_servico), 201)
+    return success_response_service(service_schema.dump(novo_servico), 201)
 
 
 def atualservico(id, data):
-    servico = Services.query.get_or_404(id)
+    servico = Service.query.get_or_404(id)
 
-    dados_validados = services_schema.load(data, partial=True)
+    dados_validados = service_schema.load(data, partial=True)
 
     for campo, valor in dados_validados.items():
         setattr(servico, campo, valor)
 
     db.session.commit()
 
-    return success_response(services_schema.dump(servico))
+    return success_response_service(service_schema.dump(servico))
 
 
 def delservico(id):
-    servico = Services.query.get_or_404(id)
+    servico = Service.query.get_or_404(id)
 
     db.session.delete(servico)
     db.session.commit()

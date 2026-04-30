@@ -1,15 +1,14 @@
 from marshmallow import fields
 
 from app.extensions import ma
-from app.models.services import Provider
+from app.models.service import Providers
 
 
-class ProviderSchema(ma.SQLAlchemySchema):
+class ProvidersSchema(ma.SQLAlchemySchema):
     class Meta:
-        model = Provider
+        model = Providers
 
     id = ma.auto_field(dump_only=True)
     descricao = ma.auto_field(required=True)
     status = ma.auto_field(required=True)   
-
-    
+    service_id = fields.Integer(required=True)

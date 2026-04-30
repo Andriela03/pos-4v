@@ -1,15 +1,15 @@
 from flask import Blueprint, jsonify, request
 
-from app.controllers.service_controller import listar_ordens_por_servico
+from app.controllers.providers_controller import listar_ordens_por_servico
 from app.controllers.service_controller import (
-    atualizar_servico,
+    atualservico,
     criar_servico,
-    deletar_servico,
+    delservico,
     listar_servico,
 )
 
 
-services_bp = Blueprint("services", __name__)
+services_bp = Blueprint("service", __name__)
 
 
 @services_bp.route("/", methods=["GET"])
@@ -33,14 +33,14 @@ def patch_services(id):
 
 
 @services_bp.route("/<int:id>", methods=["DELETE"])
-def delete_services(id):
-    response, status = deletar_service(id)
+def delservices(id):
+    response, status = delservico(id)
     if status == 204:
         return "", 204
     return jsonify(response), status
 
 
-@services_bp.route("/<int:service_id>/ordens", methods=["GET"])
+@services_bp.route("/<int:service_id>/orders", methods=["GET"])
 def get_service_ordens(service_id):
     response, status = listar_ordens_por_servico(service_id)
     return jsonify(response), status
