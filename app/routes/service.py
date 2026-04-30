@@ -9,7 +9,7 @@ from app.controllers.service_controller import (
 )
 
 
-services_bp = Blueprint("service", __name__)
+services_bp = Blueprint("services", __name__)
 
 
 @services_bp.route("/", methods=["GET"])
@@ -20,14 +20,14 @@ def get_services():
 
 @services_bp.route("/", methods=["POST"])
 def post_services():
-    data = request.get_json()
+    data = request.get_json(force=True)
     response, status = criar_servico(data)
     return jsonify(response), status
 
 
 @services_bp.route("/<int:id>", methods=["PATCH"])
 def patch_services(id):
-    data = request.get_json()
+    data = request.get_json(force=True)
     response, status = atualservico(id, data)
     return jsonify(response), status
 
